@@ -15,14 +15,14 @@ namespace GradeBook.GradeBooks
         }
         public override char GetLetterGrade(double averageGrade)
         {
-           if(Students.Count< 5)
+            if (Students.Count < 5)
             {
                 throw new InvalidOperationException("Ranked-grading requires a minimum of 5 students to work");
             }
             var threshold = (int)Math.Ceiling(Students.Count * 0.2);
-            var grades = Students.OrderByDescending(e => e.AverageGrade).Select(e => e.AverageGrade).ToList();  
+            var grades = Students.OrderByDescending(e => e.AverageGrade).Select(e => e.AverageGrade).ToList();
 
-            if(averageGrade >= grades[threshold - 1])
+            if (averageGrade >= grades[threshold - 1])
             {
                 return 'A';
             }
@@ -42,8 +42,23 @@ namespace GradeBook.GradeBooks
             {
                 return 'F';
             }
-
-
         }
+
+            public override void CalculateStatistics()
+        {
+            if (Students.Count < 5)
+            {
+                Console.WriteLine("Ranked grading requires at least 5 students.");
+                return;
+            }
+            else
+            {
+                base.CalculateStatistics();
+            }
+                
+        }
+
+
     }
+    
 }
