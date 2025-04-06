@@ -10,17 +10,20 @@ using Newtonsoft.Json.Linq;
 namespace GradeBook.GradeBooks
 {
     
-    public class BaseGradeBook
+    public abstract class BaseGradeBook
     {
-       
+        
+        public bool IsWeighted { get; set; }
 
         public GradeBookType Type { get; set; }
         public string Name { get; set; }
         public List<Student> Students { get; set; }
 
-        public BaseGradeBook(string name)
+        public BaseGradeBook(string name, bool isweighted)
         {
+           
             Name = name;
+            IsWeighted = isweighted;
             Students = new List<Student>();
         }
        
@@ -122,6 +125,7 @@ namespace GradeBook.GradeBooks
                     return 1;
                 case 'F':
                     return 0;
+                
             }
             return 0;
         }
